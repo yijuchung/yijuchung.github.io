@@ -1,0 +1,115 @@
+{% assign metrics = site.data.metrics %}
+<section id="activity" class="section activity-section" aria-labelledby="activity-heading">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">GitHub activity</p>
+      <h2 id="activity-heading">A year of building</h2>
+    </div>
+    {% if metrics.generated_at %}
+      <p class="data-status">Locally synced {{ metrics.generated_at | date: "%b %-d, %Y" }}</p>
+    {% endif %}
+  </div>
+
+  {% if metrics.totals %}
+    <div class="metric-grid">
+      <article class="metric-card">
+        <p class="metric-label">All contributions</p>
+        <p class="metric-value">{{ metrics.totals.contributions }}</p>
+        <p class="metric-context">Public and private activity</p>
+      </article>
+      <article class="metric-card">
+        <p class="metric-label">Public</p>
+        <p class="metric-value">{{ metrics.totals.public_contributions }}</p>
+        <p class="metric-context">Visible GitHub contributions</p>
+      </article>
+      <article class="metric-card">
+        <p class="metric-label">Private</p>
+        <p class="metric-value">{{ metrics.totals.private_contributions }}</p>
+        <p class="metric-context">Aggregate count only</p>
+      </article>
+      <article class="metric-card">
+        <p class="metric-label">Active days</p>
+        <p class="metric-value">{{ metrics.activity.active_days }}</p>
+        <p class="metric-context">{{ metrics.period.days }} day window</p>
+      </article>
+    </div>
+
+    <div class="calendar-panel">
+      <div class="calendar-header">
+        <div>
+          <h3>Contribution cadence</h3>
+          <p>{{ metrics.period.from }} to {{ metrics.period.to }}</p>
+        </div>
+        <dl class="streaks">
+          <div>
+            <dt>Current streak</dt>
+            <dd>{{ metrics.activity.current_streak }} days</dd>
+          </div>
+          <div>
+            <dt>Longest streak</dt>
+            <dd>{{ metrics.activity.longest_streak }} days</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div
+        class="calendar-scroll"
+        role="img"
+        aria-label="{{ metrics.totals.contributions }} contributions across {{ metrics.activity.active_days }} active days"
+        tabindex="0"
+      >
+        <div class="contribution-grid" aria-hidden="true">
+          {% for day in metrics.calendar %}
+            <span
+              class="contribution-cell contribution-level-{{ day.level }}"
+              style="--week: {{ day.week | plus: 1 }}; --weekday: {{ day.weekday | plus: 1 }}"
+              title="{{ day.date }}: {{ day.count }} contributions"
+            ></span>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="calendar-footer">
+        <p>Less</p>
+        <div class="legend" aria-hidden="true">
+          <span class="contribution-cell contribution-level-0"></span>
+          <span class="contribution-cell contribution-level-1"></span>
+          <span class="contribution-cell contribution-level-2"></span>
+          <span class="contribution-cell contribution-level-3"></span>
+          <span class="contribution-cell contribution-level-4"></span>
+        </div>
+        <p>More</p>
+      </div>
+    </div>
+
+    <p class="detail-heading">Public contribution mix</p>
+    <dl class="detail-grid">
+      <div>
+        <dt>Commits</dt>
+        <dd>{{ metrics.totals.commits }}</dd>
+      </div>
+      <div>
+        <dt>Pull requests</dt>
+        <dd>{{ metrics.totals.pull_requests }}</dd>
+      </div>
+      <div>
+        <dt>Reviews</dt>
+        <dd>{{ metrics.totals.pull_request_reviews }}</dd>
+      </div>
+      <div>
+        <dt>Issues</dt>
+        <dd>{{ metrics.totals.issues }}</dd>
+      </div>
+    </dl>
+
+    <aside class="privacy-note">
+      <p class="privacy-title">Private by design</p>
+      <p>Only aggregate counts leave the local sync. Private repository names, organizations, branches, and content are never queried or published.</p>
+    </aside>
+  {% else %}
+    <div class="empty-state">
+      <h3>Metrics sync pending</h3>
+      <p>Run <code>python3 scripts/sync_contributions.py</code> locally to publish aggregate activity.</p>
+    </div>
+  {% endif %}
+</section>

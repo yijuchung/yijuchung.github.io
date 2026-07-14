@@ -1,0 +1,7 @@
+_site/
+.bundle/
+.jekyll-cache/
+.sass-cache/
+__pycache__/
+*.py[cod]
+vendor/
