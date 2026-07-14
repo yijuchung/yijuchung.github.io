@@ -40,12 +40,10 @@ gh auth status --hostname github.com >/dev/null 2>&1 ||
 branch="$(git symbolic-ref --quiet --short HEAD)" ||
   fail "Releases must be created from a branch, not a detached HEAD."
 
-if default_ref="$(git symbolic-ref --quiet --short "refs/remotes/$remote/HEAD" 2>/dev/null)"; then
-  default_branch="${default_ref#"$remote/"}"
-else
-  default_branch="$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')" ||
-    fail "Could not determine the repository's default branch."
-fi
+default_branch="$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name')" ||
+  fail "Could not determine the repository's default branch."
+[[ -n "$default_branch" ]] ||
+  fail "Could not determine the repository's default branch."
 
 if [[ "$branch" != "$default_branch" ]]; then
   fail "Check out the default branch '$default_branch' before releasing."
