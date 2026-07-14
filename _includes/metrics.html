@@ -5,9 +5,12 @@
       <p class="eyebrow">GitHub activity</p>
       <h2 id="activity-heading">A year of building</h2>
     </div>
-    {% if metrics.generated_at %}
-      <p class="data-status">Locally synced {{ metrics.generated_at | date: "%b %-d, %Y" }}</p>
-    {% endif %}
+    <p class="data-status">
+      {% if metrics.generated_at %}
+        <span>Private snapshot synced {{ metrics.generated_at | date: "%b %-d, %Y" }}</span>
+      {% endif %}
+      <a href="https://github.com/yijuchung?tab=contributions" rel="me noopener noreferrer">Public activity live on GitHub</a>
+    </p>
   </div>
 
   {% if metrics.totals %}
@@ -20,7 +23,7 @@
       <article class="metric-card">
         <p class="metric-label">Public</p>
         <p class="metric-value">{{ metrics.totals.public_contributions }}</p>
-        <p class="metric-context">Visible GitHub contributions</p>
+        <p class="metric-context">Snapshot at private sync</p>
       </article>
       <article class="metric-card">
         <p class="metric-label">Private</p>
@@ -34,52 +37,63 @@
       </article>
     </div>
 
+    {% assign isocalendar_asset = site.static_files | where: "path", "/assets/metrics/isocalendar.svg" | first %}
     <div class="calendar-panel">
       <div class="calendar-header">
         <div>
           <h3>Contribution cadence</h3>
-          <p>{{ metrics.period.from }} to {{ metrics.period.to }}</p>
-        </div>
-        <dl class="streaks">
-          <div>
-            <dt>Current streak</dt>
-            <dd>{{ metrics.activity.current_streak }} days</dd>
-          </div>
-          <div>
-            <dt>Longest streak</dt>
-            <dd>{{ metrics.activity.longest_streak }} days</dd>
-          </div>
-        </dl>
-      </div>
-
-      <div
-        class="calendar-scroll"
-        role="img"
-        aria-label="{{ metrics.totals.contributions }} contributions across {{ metrics.activity.active_days }} active days"
-        tabindex="0"
-      >
-        <div class="contribution-grid" aria-hidden="true">
-          {% for day in metrics.calendar %}
-            <span
-              class="contribution-cell contribution-level-{{ day.level }}"
-              style="--week: {{ day.week | plus: 1 }}; --weekday: {{ day.weekday | plus: 1 }}"
-              title="{{ day.date }}: {{ day.count }} contributions"
-            ></span>
-          {% endfor %}
+          <p>Rolling 180-day history</p>
         </div>
       </div>
 
-      <div class="calendar-footer">
-        <p>Less</p>
-        <div class="legend" aria-hidden="true">
-          <span class="contribution-cell contribution-level-0"></span>
-          <span class="contribution-cell contribution-level-1"></span>
-          <span class="contribution-cell contribution-level-2"></span>
-          <span class="contribution-cell contribution-level-3"></span>
-          <span class="contribution-cell contribution-level-4"></span>
+      {% if isocalendar_asset %}
+        <figure class="isocalendar-figure">
+          <div class="isocalendar-image-wrap">
+            <img
+              class="isocalendar-image"
+              src="{{ '/assets/metrics/isocalendar.svg' | relative_url }}"
+              alt="Isometric half-year GitHub contribution calendar for Yi-Ju Chung"
+            >
+          </div>
+          <figcaption class="isocalendar-caption">
+            <span>Private and public contribution cadence</span>
+            <a href="https://github.com/lowlighter/metrics/tree/master/source/plugins/isocalendar" rel="noopener noreferrer">lowlighter/metrics isocalendar</a>
+          </figcaption>
+        </figure>
+      {% else %}
+        {% assign cadence_offset = metrics.calendar.size | minus: 180 %}
+        {% assign cadence_days = metrics.calendar | slice: cadence_offset, 180 %}
+        {% assign first_cadence_day = cadence_days | first %}
+        <div
+          class="calendar-scroll"
+          role="img"
+          aria-label="Rolling half-year GitHub contribution calendar"
+          tabindex="0"
+        >
+          <div class="contribution-grid" aria-hidden="true">
+            {% for day in cadence_days %}
+              <span
+                class="contribution-cell contribution-level-{{ day.level }}"
+                style="--week: {{ day.week | minus: first_cadence_day.week | plus: 1 }}; --weekday: {{ day.weekday | plus: 1 }}"
+                title="{{ day.date }}: {{ day.count }} contributions"
+              ></span>
+            {% endfor %}
+          </div>
         </div>
-        <p>More</p>
-      </div>
+
+        <div class="calendar-footer">
+          <p>Less</p>
+          <div class="legend" aria-hidden="true">
+            <span class="contribution-cell contribution-level-0"></span>
+            <span class="contribution-cell contribution-level-1"></span>
+            <span class="contribution-cell contribution-level-2"></span>
+            <span class="contribution-cell contribution-level-3"></span>
+            <span class="contribution-cell contribution-level-4"></span>
+          </div>
+          <p>More</p>
+        </div>
+        <p class="isocalendar-pending">Run the local isocalendar sync to replace this fallback with the isometric view.</p>
+      {% endif %}
     </div>
 
     <p class="detail-heading">Public contribution mix</p>
@@ -102,10 +116,6 @@
       </div>
     </dl>
 
-    <aside class="privacy-note">
-      <p class="privacy-title">Private by design</p>
-      <p>Only aggregate counts leave the local sync. Private repository names, organizations, branches, and content are never queried or published.</p>
-    </aside>
   {% else %}
     <div class="empty-state">
       <h3>Metrics sync pending</h3>

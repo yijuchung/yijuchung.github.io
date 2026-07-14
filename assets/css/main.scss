@@ -192,14 +192,6 @@ code {
   line-height: 0.9;
 }
 
-.hero .lede {
-  max-width: 700px;
-  margin: 0;
-  color: var(--cp-text-muted);
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-  line-height: 1.45;
-}
-
 .eyebrow {
   margin: 0;
   color: var(--cp-text-soft);
@@ -290,10 +282,18 @@ code {
 }
 
 .data-status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 4px 12px;
   margin: 0;
   color: var(--cp-text-muted);
   font-family: Consolas, "Courier New", Courier, monospace;
   font-size: 0.75rem;
+}
+
+.data-status a {
+  color: var(--cp-text-soft);
 }
 
 .metric-grid {
@@ -357,26 +357,56 @@ code {
   font-size: 0.875rem;
 }
 
-.streaks {
-  display: flex;
-  gap: 32px;
-  margin: 0;
-}
-
-.streaks div {
-  min-width: 112px;
-}
-
-.streaks dt,
 .detail-grid dt {
   color: var(--cp-text-muted);
   font-size: 0.75rem;
 }
 
-.streaks dd,
 .detail-grid dd {
   margin: 2px 0 0;
   font-weight: 700;
+}
+
+.isocalendar-figure {
+  margin: 0;
+}
+
+.isocalendar-image-wrap {
+  display: flex;
+  min-height: 240px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--cp-border);
+  border-radius: 0.625rem;
+  background: var(--cp-surface-soft);
+}
+
+.isocalendar-image {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  height: auto;
+}
+
+.isocalendar-caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin-top: 12px;
+  color: var(--cp-text-muted);
+  font-size: 0.75rem;
+}
+
+.isocalendar-caption a {
+  color: var(--cp-text-soft);
+}
+
+.isocalendar-pending {
+  margin: 12px 4px 0;
+  color: var(--cp-text-muted);
+  font-size: 0.75rem;
 }
 
 .calendar-scroll {
@@ -472,7 +502,6 @@ code {
   font-size: 1.25rem;
 }
 
-.privacy-note,
 .empty-state {
   margin-top: 24px;
   padding: 24px;
@@ -480,15 +509,9 @@ code {
   background: var(--cp-surface-soft);
 }
 
-.privacy-note p,
 .empty-state p {
   max-width: 800px;
   margin: 0;
-}
-
-.privacy-note .privacy-title {
-  margin-bottom: 4px;
-  font-weight: 700;
 }
 
 .empty-state h3 {
@@ -677,10 +700,12 @@ code {
     padding: 20px;
   }
 
-  .streaks {
-    width: 100%;
-    justify-content: space-between;
-    gap: 16px;
+  .data-status {
+    justify-content: start;
+  }
+
+  .isocalendar-image-wrap {
+    min-height: 160px;
   }
 
   .detail-grid {

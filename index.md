@@ -8,7 +8,6 @@ description: GitHub activity and engineering principles from Yi-Ju Chung.
   <div>
     <p class="eyebrow">Engineering profile</p>
     <h1 id="hero-heading">Yi-Ju Chung</h1>
-    <p class="lede">Software engineer focused on durable systems, clear technical direction, and team-scale leverage.</p>
     <div class="hero-actions">
       <a class="button" href="https://github.com/yijuchung" rel="me noopener noreferrer">View GitHub</a>
       <a class="button button-secondary" href="https://www.linkedin.com/in/yjcgators/" rel="me noopener noreferrer">Connect on LinkedIn</a>

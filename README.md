@@ -17,18 +17,32 @@ Open <http://127.0.0.1:4000>.
 
 ## Sync contribution metrics
 
-The contribution sync is intentionally local-only. It requires Python 3, GitHub CLI, and an authenticated GitHub account matching `yijuchung`.
+Private contribution sync is intentionally local-only. It requires Python 3, GitHub CLI, and an authenticated GitHub account matching `yijuchung`.
 
 ```sh
 gh auth refresh -h github.com -s repo,read:org,read:user
 python3 scripts/sync_contributions.py
 ```
 
-The script writes `_data/metrics.json`. Commit that generated file when the public site should be refreshed.
+The script writes `_data/metrics.json`. The site labels its timestamp as the private snapshot time and links separately to live public activity on GitHub.
 
 Private activity is reduced to aggregate counts. The GraphQL request does not query private repository names, organizations, branches, or content. The script refuses to run in CI and refuses to publish private metrics when the authenticated user does not match the profile owner.
 
 The sync intentionally ignores `GH_TOKEN` and `GITHUB_TOKEN` environment overrides. It uses the local `gh` keyring credential so an ephemeral token cannot silently change which contributions GitHub classifies as private.
+
+### Generate the half-year isocalendar
+
+The contribution cadence uses the official [`lowlighter/metrics` isocalendar plugin](https://github.com/lowlighter/metrics/tree/master/source/plugins/isocalendar) with its `half-year` duration. Generate the SVG locally with Docker:
+
+```sh
+export METRICS_TOKEN="$(env -u GH_TOKEN gh auth token)"
+scripts/sync_isocalendar.sh
+unset METRICS_TOKEN
+```
+
+The wrapper pins `ghcr.io/lowlighter/metrics:v3.34`, disables animations, applies the site's graphite palette, and writes `assets/metrics/isocalendar.svg`. It refuses to run in CI and never prints or persists the token.
+
+Commit `_data/metrics.json` and `assets/metrics/isocalendar.svg` together when private metrics should be refreshed.
 
 ## Deploy
 
