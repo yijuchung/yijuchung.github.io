@@ -1,0 +1,21 @@
+title: Yi-Ju Chung
+description: Software engineer focused on durable systems, clear technical direction, and team-scale leverage.
+url: https://yijuchung.github.io
+baseurl: ""
+lang: en
+timezone: America/Los_Angeles
+
+markdown: kramdown
+kramdown:
+  input: GFM
+permalink: pretty
+sass:
+  style: compressed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - scripts
+  - tests
+  - vendor
