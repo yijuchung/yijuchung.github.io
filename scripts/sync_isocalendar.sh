@@ -26,6 +26,8 @@ fi
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 output_path="$repo_root/assets/metrics/isocalendar.svg"
+metrics_image="ghcr.io/lowlighter/metrics:v3.34"
+metrics_platform="linux/amd64"
 temporary_dir="$(mktemp -d)"
 trap 'rm -rf "$temporary_dir"; unset INPUT_TOKEN' EXIT
 
@@ -53,7 +55,7 @@ h2, h3 {
 }
 '
 
-docker run --init --rm \
+docker run --platform "$metrics_platform" --init --rm \
   --env INPUT_TOKEN \
   --env INPUT_USER \
   --env INPUT_FILENAME \
@@ -67,7 +69,7 @@ docker run --init --rm \
   --env INPUT_OUTPUT_ACTION \
   --env INPUT_EXTRAS_CSS \
   --volume "$temporary_dir:/renders" \
-  ghcr.io/lowlighter/metrics:v3.34
+  "$metrics_image"
 
 unset INPUT_TOKEN
 
