@@ -40,7 +40,7 @@ scripts/sync_isocalendar.sh
 unset METRICS_TOKEN
 ```
 
-The wrapper pins `ghcr.io/lowlighter/metrics:v3.34`, disables animations, applies the site's graphite palette, and writes `assets/metrics/isocalendar.svg`. It refuses to run in CI and never prints or persists the token.
+The wrapper pins `ghcr.io/lowlighter/metrics:v3.34`, explicitly requests the image's published `linux/amd64` platform, disables animations, applies the site's graphite palette, and writes `assets/metrics/isocalendar.svg`. ARM hosts require Docker's AMD64 emulation support. The wrapper refuses to run in CI and never prints or persists the token.
 
 Commit `_data/metrics.json` and `assets/metrics/isocalendar.svg` together when private metrics should be refreshed.
 
