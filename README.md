@@ -44,6 +44,16 @@ The wrapper pins `ghcr.io/lowlighter/metrics:v3.34`, disables animations, applie
 
 Commit `_data/metrics.json` and `assets/metrics/isocalendar.svg` together when private metrics should be refreshed.
 
+## Release
+
+Create a release from a clean checkout of `master`:
+
+```sh
+scripts/release.sh v1.0.0
+```
+
+The script refreshes both private-contribution artifacts, commits them, creates an annotated tag, atomically pushes `master` and the tag, and creates a GitHub release with generated notes. It requires GitHub CLI authentication with access to private contributions and a running Docker daemon.
+
 ## Deploy
 
 GitHub Pages builds and deploys the Jekyll site through `.github/workflows/pages.yml` whenever `master` changes. In the repository settings, set **Pages > Build and deployment > Source** to **GitHub Actions**.
