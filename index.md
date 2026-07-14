@@ -1,13 +1,23 @@
 ---
 layout: default
-title: Yi-Ju Chung | Engineering profile
-description: GitHub activity and engineering principles from Yi-Ju Chung.
+title: Yi-Ju Chung | Staff Engineer & Engineering Leader
+description: AI orchestration, product architecture, engineering mentorship, and Web3 + AI from Yi-Ju Chung.
 ---
 
 <section class="hero" aria-labelledby="hero-heading">
   <div>
     <p class="eyebrow">Engineering profile</p>
     <h1 id="hero-heading">Yi-Ju Chung</h1>
+    <p class="hero-subtitle">
+      <span class="hero-title">Experienced Staff Engineer &amp; Engineering Leader</span>
+      <span class="hero-credentials" aria-label="Microsoft AI, formerly Coinbase, Netflix, Uber, and more">
+        <span class="company-entry"><span class="company-icon" aria-hidden="true">M</span>Microsoft AI</span>
+        <span class="company-entry"><span class="company-icon" aria-hidden="true">C</span>ex-Coinbase</span>
+        <span class="company-entry"><span class="company-icon" aria-hidden="true">N</span>ex-Netflix</span>
+        <span class="company-entry"><span class="company-icon" aria-hidden="true">U</span>ex-Uber</span>
+        <span class="company-more" aria-hidden="true">...</span>
+      </span>
+    </p>
     <div class="hero-actions">
       <a class="button" href="https://github.com/yijuchung" rel="me noopener noreferrer">View GitHub</a>
       <a class="button button-secondary" href="https://www.linkedin.com/in/yjcgators/" rel="me noopener noreferrer">Connect on LinkedIn</a>
@@ -17,6 +27,47 @@ description: GitHub activity and engineering principles from Yi-Ju Chung.
     <p class="aside-title">Systems. Execution. Leverage.</p>
     <p class="aside-copy">I care about reducing ambiguity, making sound tradeoffs, and leaving teams and systems stronger than I found them.</p>
   </aside>
+</section>
+
+<section id="services" class="section services-section" aria-labelledby="services-heading">
+  <div class="services-intro">
+    <div>
+      <p class="eyebrow">How I can help</p>
+      <h2 id="services-heading">From idea to intelligent system</h2>
+    </div>
+    <p>I help teams turn ambitious ideas into durable products, systems, and engineering practices for the AI era.</p>
+  </div>
+
+  <div class="services-grid">
+    <article class="service-card">
+      <p class="service-number">01</p>
+      <div>
+        <h3>End-to-end AI orchestration</h3>
+        <p>Build full-stack AI orchestration layers with local models or leading providers, from model routing and workflows to production APIs and user experiences.</p>
+      </div>
+    </article>
+    <article class="service-card">
+      <p class="service-number">02</p>
+      <div>
+        <h3>Business and product architecture</h3>
+        <p>Turn a business idea into a clear product strategy, system design, technical roadmap, and delivery plan.</p>
+      </div>
+    </article>
+    <article class="service-card">
+      <p class="service-number">03</p>
+      <div>
+        <h3>Engineering mentorship for the AI era</h3>
+        <p>Help engineers and technical leaders build sound judgment, adopt AI-native workflows, and grow without lowering the engineering bar.</p>
+      </div>
+    </article>
+    <article class="service-card">
+      <p class="service-number">04</p>
+      <div>
+        <h3>Web3 + AI</h3>
+        <p>Architect products and platforms that combine decentralized systems with intelligent agents and AI-powered experiences.</p>
+      </div>
+    </article>
+  </div>
 </section>
 
 {% include metrics.html %}
