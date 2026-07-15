@@ -10,11 +10,23 @@ description: AI orchestration, product architecture, engineering mentorship, and
     <h1 id="hero-heading">Yi-Ju Chung</h1>
     <p class="hero-subtitle">
       <span class="hero-title">Experienced Staff Engineer &amp; Engineering Leader</span>
-      <span class="hero-credentials" aria-label="Microsoft AI, formerly Coinbase, Netflix, Uber, and more">
-        <span class="company-entry"><span class="company-icon" aria-hidden="true">M</span>Microsoft AI</span>
-        <span class="company-entry"><span class="company-icon" aria-hidden="true">C</span>ex-Coinbase</span>
-        <span class="company-entry"><span class="company-icon" aria-hidden="true">N</span>ex-Netflix</span>
-        <span class="company-entry"><span class="company-icon" aria-hidden="true">U</span>ex-Uber</span>
+      <span class="hero-credentials">
+        <a class="company-entry" href="https://microsoft.ai/" rel="noopener noreferrer">
+          <img class="company-icon" src="{{ '/assets/company-icons/microsoft-ai.png' | relative_url }}" alt="" width="22" height="22">
+          <span>Microsoft AI</span>
+        </a>
+        <a class="company-entry" href="https://www.coinbase.com/" rel="noopener noreferrer">
+          <img class="company-icon" src="{{ '/assets/company-icons/coinbase.png' | relative_url }}" alt="" width="22" height="22">
+          <span>ex-Coinbase</span>
+        </a>
+        <a class="company-entry" href="https://www.netflix.com/" rel="noopener noreferrer">
+          <img class="company-icon" src="{{ '/assets/company-icons/netflix.png' | relative_url }}" alt="" width="22" height="22">
+          <span>ex-Netflix</span>
+        </a>
+        <a class="company-entry" href="https://www.uber.com/" rel="noopener noreferrer">
+          <img class="company-icon" src="{{ '/assets/company-icons/uber.png' | relative_url }}" alt="" width="22" height="22">
+          <span>ex-Uber</span>
+        </a>
         <span class="company-more" aria-hidden="true">...</span>
       </span>
     </p>
